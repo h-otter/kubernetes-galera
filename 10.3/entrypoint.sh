@@ -1,15 +1,11 @@
 #!/bin/bash
 
-cluster_node=`dig +short +search $POD_SERVICE_NAME | tr '\n' ','`
 
-echo "[galera]" >> /etc/mysql/conf.d/generated_cluster.cnf
-echo "wsrep_cluster_name=$POD_SERVICE_NAME" >> /etc/mysql/conf.d/generated_cluster.cnf
-echo "wsrep_cluster_address=gcomm://$cluster_node" >> /etc/mysql/conf.d/generated_cluster.cnf
-echo "wsrep_node_address=$POD_IP" >> /etc/mysql/conf.d/generated_cluster.cnf
+ARGS="--wsrep-cluster-name=$POD_SERVICE_NAME --wsrep-node-address=$POD_IP"
 
 if [ $(dig +short +search galera | wc -l) = 1 ]
 then
-  mysqld --wsrep-new-cluster
+  mysqld $ARGS --wsrep-new-cluster
 else
-  mysqld
+  mysqld $ARGS --wsrep-cluster-address=gcomm://`dig +short +search $POD_SERVICE_NAME | tr '\n' ','`
 fi
