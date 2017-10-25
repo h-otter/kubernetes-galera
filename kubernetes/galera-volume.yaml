@@ -7,7 +7,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   capacity:
-    storage: 2Gi
+    storage: 30Gi
   hostPath:
     path: /data/datadir-galera-0/
 ---
@@ -20,7 +20,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   capacity:
-    storage: 2Gi
+    storage: 30Gi
   hostPath:
     path: /data/datadir-galera-1/
 ---
@@ -33,6 +33,6 @@ spec:
   accessModes:
     - ReadWriteOnce
   capacity:
-    storage: 2Gi
+    storage: 30Gi
   hostPath:
     path: /data/datadir-galera-2/
