@@ -3,7 +3,7 @@
 
 ARGS="--wsrep-cluster-name=$POD_SERVICE_NAME --wsrep-node-address=$POD_IP"
 
-if [ -z $(dig +short +search $POD_SERVICE_NAME | grep $POD_IP) ]
+if [ -z $(dig +short +search $POD_SERVICE_NAME) ]
 then
   /docker-entrypoint.sh mysqld $ARGS --wsrep-new-cluster
 else
