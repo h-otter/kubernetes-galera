@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: mariadb
-        image: hotter/galera:10.3
+        image: hotter/kubernetes-galera:10.3
         ports:
         - containerPort: 3306
           name: mysql
