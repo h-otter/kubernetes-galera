@@ -5,7 +5,7 @@ metadata:
   namespace: middleware
 spec:
   replicas: 3
-  serviceName: mysql
+  serviceName: inner-mysql
   template:
     metadata:
       labels:
