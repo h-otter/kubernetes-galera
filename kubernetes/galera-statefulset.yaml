@@ -5,7 +5,7 @@ metadata:
   namespace: middleware
 spec:
   replicas: 3
-  serviceNmae: galera
+  serviceName: galera
   template:
     metadata:
       labels:
