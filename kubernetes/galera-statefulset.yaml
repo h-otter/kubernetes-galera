@@ -5,7 +5,7 @@ metadata:
   namespace: middleware
 spec:
   replicas: 3
-  serviceName: galera
+  serviceName: mysql
   template:
     metadata:
       labels:
