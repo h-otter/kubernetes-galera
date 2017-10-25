@@ -1,0 +1,71 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: galera
+  namespace: middleware
+spec:
+  replicas: 3
+  serviceNmae: galera
+  template:
+    metadata:
+      labels:
+        app: galera
+      namespace: middleware
+    spec:
+      containers:
+      - name: mariadb
+        image: hotter/galera:10.3
+        ports:
+        - containerPort: 3306
+          name: mysql
+        - containerPort: 4444
+          name: sst
+        - containerPort: 4567
+          name: replication
+        - containerPort: 4568
+          name: ist
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: POD_SERVICE_NAME
+          value: galera
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: garela
+              key: root_password
+        readinessProbe:
+          exec:
+            command: ["bash", "-c", "mysql -uroot -p\"${MYSQL_ROOT_PASSWORD}\" -e 'show databases;'"]
+          initialDelaySeconds: 60
+          timeoutSeconds: 5
+        volumeMounts:
+        - name: config
+          mountPath: /etc/mysql/conf.d
+        - name: datadir
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: config
+        configMap:
+          name: mysql-config
+          items:
+            - path: "galera.cnf"
+              key: galera.cnf
+            - path: "mariadb.cnf"
+              key: mariadb.cnf
+            - path: "tune.cnf"
+              key: tune.cnf
+  volumeClaimTemplates:
+  - metadata:
+      name: datadir
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 2Gi
