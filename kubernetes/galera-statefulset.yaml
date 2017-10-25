@@ -38,7 +38,7 @@ spec:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: garela
+              name: galera
               key: root_password
         readinessProbe:
           exec:
