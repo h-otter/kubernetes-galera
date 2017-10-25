@@ -7,5 +7,5 @@ if [ -z $(dig +short +search $POD_SERVICE_NAME | grep -v $POD_IP) ]
 then
   /docker-entrypoint.sh mysqld $ARGS --wsrep-new-cluster
 else
-  /docker-entrypoint.sh mysqld $ARGS --wsrep-cluster-address=gcomm://`dig +short +search $POD_SERVICE_NAME | grep -v $POD_IP | tr '\n' ','`
+  /docker-entrypoint.sh mysqld $ARGS --wsrep-cluster-address=gcomm://${`dig +short +search $POD_SERVICE_NAME | grep -v $POD_IP | tr '\n' ','`/%?/}
 fi
