@@ -42,7 +42,7 @@ spec:
               name: galera
               key: root_password
         - name: MYSQL_INITDB_SKIP_TZINFO
-          value: TRUE
+          value: "TRUE"
         - name: TZ
           value: "Asia/Tokyo"
         readinessProbe:
