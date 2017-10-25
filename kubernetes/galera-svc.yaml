@@ -12,12 +12,6 @@ spec:
   ports:
   - port: 3306
     name: mysql
-  - port: 4444
-    name: sst
-  - port: 4567
-    name: replication
-  - port: 4568
-    name: ist
   clusterIP: None
   selector:
     app: galera
