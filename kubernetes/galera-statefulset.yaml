@@ -5,7 +5,7 @@ metadata:
   namespace: middleware
 spec:
   replicas: 3
-  serviceName: inner-mysql
+  serviceName: roundrobin-mysql
   template:
     metadata:
       labels:
@@ -35,7 +35,7 @@ spec:
             fieldRef:
               fieldPath: status.podIP
         - name: POD_SERVICE_NAME
-          value: galera
+          value: roundrobin-mysql
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:

@@ -3,10 +3,11 @@ kind: Service
 metadata:
   annotations:
     service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
-  name: inner-mysql
+  name: roundrobin-mysql
   namespace: middleware
   labels:
     app: galera
+    type: roundrobin
 spec:
   ports:
   - port: 3306
