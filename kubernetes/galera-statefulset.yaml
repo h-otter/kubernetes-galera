@@ -44,7 +44,7 @@ spec:
         readinessProbe:
           exec:
             command: ["bash", "-c", "mysql -uroot -p\"${MYSQL_ROOT_PASSWORD}\" -e 'show databases;'"]
-          initialDelaySeconds: 60
+          initialDelaySeconds: 30
           timeoutSeconds: 5
         volumeMounts:
         - name: config
