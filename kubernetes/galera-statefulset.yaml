@@ -41,6 +41,8 @@ spec:
             secretKeyRef:
               name: galera
               key: root_password
+        - name: MYSQL_ROOT_HOST
+          value: "%"
         - name: MYSQL_INITDB_SKIP_TZINFO
           value: "TRUE"
         - name: TZ
