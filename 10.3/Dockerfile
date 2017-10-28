@@ -4,7 +4,6 @@ LABEL maintainer "h-otter <h-otter@outlook.jp>"
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
 		    dnsutils \
-        python-mysqldb \
 	  && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 4567
